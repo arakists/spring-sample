@@ -28,6 +28,7 @@ repositories {
 dependencies {
     // Spring and dependencies
     compile "org.springframework:spring-context:${springVersion}"
+	compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-webmvc:${springVersion}"
 	compile "org.springframework:spring-aop:${springVersion}"
 	compile "org.springframework:spring-jdbc:${springVersion}"
@@ -56,6 +57,7 @@ dependencies {
 	// Terasoluna Global Framework
 	compile ("org.terasoluna.gfw:terasoluna-gfw-web:${tereasolunaVersion}") {
 		exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
+		exclude group: 'org.springframework'
 	}
 	compile ("org.terasoluna.gfw:terasoluna-gfw-recommended-dependencies:${tereasolunaVersion}") {
 		exclude group: 'commons-dbcp', module: 'commons-dbcp'
