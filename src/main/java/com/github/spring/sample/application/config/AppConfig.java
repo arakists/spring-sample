@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -13,8 +14,11 @@ import org.terasoluna.gfw.common.exception.ExceptionLogger;
 import org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver;
 import org.terasoluna.gfw.web.exception.ExceptionLoggingFilter;
 
+import com.github.spring.sample.domain.config.DomainConfig;
+
 @Configuration
 @PropertySource(value = { "classpath*:/META-INF/spring/*.properties" }, ignoreResourceNotFound = true)
+@Import(value = { DomainConfig.class })
 public class AppConfig {
 
 	@Bean
@@ -50,9 +54,9 @@ public class AppConfig {
 
 	@Bean
 	public ExceptionLogger exceptionLogger() {
-		ExceptionLogger exceptionLogger =  new ExceptionLogger();
+		ExceptionLogger exceptionLogger = new ExceptionLogger();
 		exceptionLogger.setExceptionCodeResolver(exceptionCodeResolver());
-		
+
 		return exceptionLogger;
 	}
 
