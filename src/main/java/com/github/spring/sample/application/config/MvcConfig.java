@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,6 +30,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenInterceptor;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenRequestDataValueProcessor;
 
 @Configuration
+@PropertySource(value = { "classpath:/META-INF/spring/mvc.properties" }, ignoreResourceNotFound = true)
 @ComponentScan(basePackages = { "com.github.spring.sample.application.controller" })
 @EnableWebMvc
 @EnableAspectJAutoProxy
@@ -121,4 +124,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		return exceptionResolverLoggingInterceptor;
 	}
 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 }

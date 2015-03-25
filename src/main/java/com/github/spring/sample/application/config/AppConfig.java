@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ExceptionLogger;
@@ -17,7 +18,7 @@ import org.terasoluna.gfw.web.exception.ExceptionLoggingFilter;
 import com.github.spring.sample.domain.config.DomainConfig;
 
 @Configuration
-@PropertySource(value = { "classpath*:/META-INF/spring/*.properties" }, ignoreResourceNotFound = true)
+@PropertySource(value = { "classpath:/META-INF/spring/application.properties" }, ignoreResourceNotFound = true)
 @Import(value = { DomainConfig.class })
 public class AppConfig {
 
@@ -65,5 +66,10 @@ public class AppConfig {
 		ExceptionLoggingFilter exceptionLoggingFilter = new ExceptionLoggingFilter();
 		exceptionLoggingFilter.setExceptionLogger(exceptionLogger());
 		return exceptionLoggingFilter;
+	}
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
 	}
 }
